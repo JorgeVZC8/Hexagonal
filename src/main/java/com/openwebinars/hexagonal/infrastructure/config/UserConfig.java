@@ -38,6 +38,6 @@ public class UserConfig {
     public EditUserUseCase editUserUseCase(){return new EditUserUseCase(userRepository());}
 
     @Bean
-    public ChangePasswordUseCase changePasswordUseCase(){return new ChangePasswordUseCase(userRepository());}
+    public ChangePasswordUseCase changePasswordUseCase(){return new ChangePasswordUseCase(userRepository(),passwordEncoder);}
 
 }

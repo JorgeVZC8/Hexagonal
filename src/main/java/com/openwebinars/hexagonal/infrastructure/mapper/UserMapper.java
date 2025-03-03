@@ -1,11 +1,13 @@
 package com.openwebinars.hexagonal.infrastructure.mapper;
 
 import com.openwebinars.hexagonal.application.usecase.user.create.CreateUserCommand;
+import com.openwebinars.hexagonal.application.usecase.user.edit.ChangePasswordCommand;
 import com.openwebinars.hexagonal.application.usecase.user.edit.EditUserCommand;
 import com.openwebinars.hexagonal.domain.User;
 import com.openwebinars.hexagonal.domain.UserId;
 import com.openwebinars.hexagonal.infrastructure.db.entity.UserEntity;
 import com.openwebinars.hexagonal.infrastructure.db.entity.UserRole;
+import com.openwebinars.hexagonal.infrastructure.web.dto.user.ChangePasswordRequest;
 import com.openwebinars.hexagonal.infrastructure.web.dto.user.UserEditRequest;
 import com.openwebinars.hexagonal.infrastructure.web.dto.user.UserRequest;
 import com.openwebinars.hexagonal.infrastructure.web.dto.user.UserResponse;
@@ -61,7 +63,14 @@ public class UserMapper {
                 UserId.of(id),
                 userEditRequest.name(),
                 userEditRequest.email(),
-                userEditRequest.role().toString()
+                userEditRequest.role()
+        );
+    }
+
+    public static ChangePasswordCommand toCommand(UUID id, ChangePasswordRequest passwordRequest) {
+        return new ChangePasswordCommand(
+                UserId.of(id),
+                passwordRequest.newPassword()
         );
     }
 }

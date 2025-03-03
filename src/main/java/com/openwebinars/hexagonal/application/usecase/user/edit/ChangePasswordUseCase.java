@@ -5,17 +5,20 @@ import com.openwebinars.hexagonal.domain.UserId;
 import com.openwebinars.hexagonal.domain.error.UserNotFoundException;
 import com.openwebinars.hexagonal.domain.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @RequiredArgsConstructor
 public class ChangePasswordUseCase {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public User changePassword(UserId id, String newPassword){
-        return userRepository.getUserById(id)
-                .map(u->{
-                    u.setPassword(newPassword);
-                    return userRepository.create(u);
-                }).orElseThrow(()-> new UserNotFoundException(id));
+    public void changePassword(ChangePasswordCommand changePasswordCommand){
+        User u= userRepository.getUserById(changePasswordCommand.id())
+                .orElseThrow(()-> new UserNotFoundException(changePasswordCommand.id()));
+
+        String encodePassword = passwordEncoder.encode(changePasswordCommand.newPassword());
+        u.setPassword(encodePassword);
+        userRepository.create(u);
     }
 }

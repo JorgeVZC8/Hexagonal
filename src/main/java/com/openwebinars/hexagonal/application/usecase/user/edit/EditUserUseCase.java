@@ -15,7 +15,7 @@ public class EditUserUseCase {
                 .map(u->{
                     u.setName(command.name());
                     u.setEmail(command.email());
-                    u.setPassword(command.password());
+                    u.setRole(command.role().toString());
                     return userRepository.create(u);
                 }).orElseThrow(()-> new UserNotFoundException(command.id()));
     }

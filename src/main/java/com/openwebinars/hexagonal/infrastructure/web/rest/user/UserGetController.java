@@ -29,10 +29,15 @@ public class UserGetController {
                 .toList();
     }
 
-
     @GetMapping("/{id}")
     public UserResponse userById(@PathVariable UUID id){
         User u= findUserUseCase.findById(UserId.of(id));
+        return UserMapper.toResponse(u);
+    }
+
+    @GetMapping("/email/{email}")
+    public UserResponse userByEmail(@PathVariable String email){
+        User u= findUserUseCase.findByEmail(email);
         return UserMapper.toResponse(u);
     }
 }
