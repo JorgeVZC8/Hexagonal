@@ -13,7 +13,5 @@ public class User {
     private String name;
     private String email;
     private String password;
-
-    @Builder.Default
-    private String role ="USER";
+    private String role;
 }

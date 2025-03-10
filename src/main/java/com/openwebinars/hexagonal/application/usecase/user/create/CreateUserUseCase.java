@@ -15,6 +15,7 @@ public class CreateUserUseCase {
                 .name(command.name())
                 .email(command.email())
                 .password(command.Password())
+                .role(command.role().toString())
                 .build();
 
         return userRepository.create(u);

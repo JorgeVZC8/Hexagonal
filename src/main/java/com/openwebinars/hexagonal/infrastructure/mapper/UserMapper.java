@@ -45,7 +45,7 @@ public class UserMapper {
     }
 
     public static CreateUserCommand toCommand(UserRequest u){
-        return new CreateUserCommand(u.name(), u.email(),u.password());
+        return new CreateUserCommand(u.name(), u.email(),u.password(),u.role());
     }
 
     public static UserResponse toResponse(User u){

@@ -16,5 +16,5 @@ public interface UserRepository {
     Optional<User> getUserById(UserId id);
     Optional<User> getUserByEmail(String email);
     List<User> getByIds(Iterable<UserId> ids);
-
+    void delete(UserId id);
 }

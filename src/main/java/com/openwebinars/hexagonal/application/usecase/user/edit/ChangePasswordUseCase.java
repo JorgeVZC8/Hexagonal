@@ -19,6 +19,7 @@ public class ChangePasswordUseCase {
 
         String encodePassword = passwordEncoder.encode(changePasswordCommand.newPassword());
         u.setPassword(encodePassword);
+        System.out.println(u.getPassword());
         userRepository.create(u);
     }
 }

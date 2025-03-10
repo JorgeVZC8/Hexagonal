@@ -1,6 +1,7 @@
 package com.openwebinars.hexagonal.infrastructure.config;
 
 import com.openwebinars.hexagonal.application.usecase.user.create.CreateUserUseCase;
+import com.openwebinars.hexagonal.application.usecase.user.delete.DeleteUserUseCase;
 import com.openwebinars.hexagonal.application.usecase.user.edit.ChangePasswordUseCase;
 import com.openwebinars.hexagonal.application.usecase.user.edit.EditUserUseCase;
 import com.openwebinars.hexagonal.application.usecase.user.find.FindUserUseCase;
@@ -39,5 +40,8 @@ public class UserConfig {
 
     @Bean
     public ChangePasswordUseCase changePasswordUseCase(){return new ChangePasswordUseCase(userRepository(),passwordEncoder);}
+
+    @Bean
+    public DeleteUserUseCase deleteUserUseCase(){return new DeleteUserUseCase(userRepository());}
 
 }

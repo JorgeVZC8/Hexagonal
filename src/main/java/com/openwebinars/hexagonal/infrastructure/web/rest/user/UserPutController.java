@@ -37,9 +37,9 @@ public class UserPutController {
             return ResponseEntity.ok(UserMapper.toResponse(u));
 
         } catch (ConstraintViolationException e) {
-            return ResponseEntity.badRequest().body(null); // 400 Bad Request. Se puede devolver null o un objeto de error más descriptivo
+            return ResponseEntity.badRequest().body(null);
         } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body(null); // 400 Bad Request. Se puede devolver null o un objeto de error más descriptivo
+            return ResponseEntity.badRequest().body(null);
         } catch (Exception e) {
             return ResponseEntity.internalServerError().build(); // 500 Internal Server Error
         }
