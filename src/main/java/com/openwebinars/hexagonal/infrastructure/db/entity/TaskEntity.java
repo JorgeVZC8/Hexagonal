@@ -11,6 +11,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
+import java.util.UUID;
 
 @Entity
 @Getter
@@ -30,6 +31,7 @@ public class TaskEntity {
     @CreatedDate
     private LocalDateTime createdAt;
     private boolean complete;
+    private UUID author;
 
 
     @Override

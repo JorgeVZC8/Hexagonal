@@ -3,6 +3,7 @@ package com.openwebinars.hexagonal.infrastructure.db.repos.impl;
 
 import com.openwebinars.hexagonal.domain.Task;
 import com.openwebinars.hexagonal.domain.TaskId;
+import com.openwebinars.hexagonal.domain.UserId;
 import com.openwebinars.hexagonal.domain.repository.TaskRepository;
 import com.openwebinars.hexagonal.infrastructure.db.entity.TaskEntity;
 import com.openwebinars.hexagonal.infrastructure.db.repos.jpa.TaskEntityRepositoryJpa;
@@ -40,5 +41,13 @@ public class TaskRepositoryImpl implements TaskRepository {
     @Override
     public void delete(TaskId id) {
        taskEntityRepositoryJpa.deleteById(id.getValue());
+    }
+
+    @Override
+    public List<Task> getByUserId(UserId id) {
+        return taskEntityRepositoryJpa.findByAuthor(id.getValue())
+                .stream()
+                .map(TaskMapper::toDomain)
+                .toList();
     }
 }

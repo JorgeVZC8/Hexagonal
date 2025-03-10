@@ -22,7 +22,7 @@ import java.util.UUID;
 public class AuthUser implements UserDetails {
 
     private UUID id;
-    private String nomnre, email, password;
+    private String nombre, email, password;
     private UserRole role;
 
     @Override
@@ -42,7 +42,7 @@ public class AuthUser implements UserDetails {
     public static AuthUser of(User user){
         return AuthUser.builder()
                 .id(user.getId().getValue())
-                .nomnre(user.getName())
+                .nombre(user.getName())
                 .email(user.getEmail())
                 .password(user.getPassword())
                 .role(UserRole.of(user.getRole()))
