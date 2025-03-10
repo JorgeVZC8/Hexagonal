@@ -1,11 +1,13 @@
 package com.openwebinars.hexagonal.infrastructure.config;
 
+import com.openwebinars.hexagonal.application.service.CreateTaskService;
 import com.openwebinars.hexagonal.application.usecase.task.create.CreateTaskUseCase;
 import com.openwebinars.hexagonal.application.usecase.task.delete.DeleteTaskUseCase;
 import com.openwebinars.hexagonal.application.usecase.task.edit.CompleteTaskUseCase;
 import com.openwebinars.hexagonal.application.usecase.task.edit.EditTaskCommand;
 import com.openwebinars.hexagonal.application.usecase.task.edit.EditTaskUseCase;
 import com.openwebinars.hexagonal.application.usecase.task.find.FindTaskUseCase;
+import com.openwebinars.hexagonal.application.usecase.user.find.FindUserUseCase;
 import com.openwebinars.hexagonal.domain.repository.TaskRepository;
 import com.openwebinars.hexagonal.infrastructure.db.repos.impl.TaskRepositoryImpl;
 import com.openwebinars.hexagonal.infrastructure.db.repos.jpa.TaskEntityRepositoryJpa;
@@ -19,6 +21,7 @@ import org.springframework.context.annotation.Configuration;
 public class TaskConfig {
 
     private final TaskEntityRepositoryJpa taskEntityRepositoryJpa;
+    private final FindUserUseCase findUserUseCase;
 
     @Bean
     public TaskRepository taskRepositoryJpa(){
@@ -48,5 +51,10 @@ public class TaskConfig {
     @Bean
     public DeleteTaskUseCase deleteTaskUseCase(){
         return new DeleteTaskUseCase(taskRepositoryJpa());
+    }
+
+    @Bean
+    public CreateTaskService createTaskService(){
+        return new CreateTaskService(createTaskUseCase(), findUserUseCase);
     }
 }

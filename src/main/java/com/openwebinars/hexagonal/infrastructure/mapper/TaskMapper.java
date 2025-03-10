@@ -5,10 +5,12 @@ import com.openwebinars.hexagonal.application.usecase.task.edit.EditTaskCommand;
 import com.openwebinars.hexagonal.domain.Task;
 import com.openwebinars.hexagonal.domain.TaskId;
 import com.openwebinars.hexagonal.domain.UserId;
+import com.openwebinars.hexagonal.domain.UserTask;
 import com.openwebinars.hexagonal.infrastructure.db.entity.TaskEntity;
 import com.openwebinars.hexagonal.infrastructure.web.dto.task.TaskEditRequest;
 import com.openwebinars.hexagonal.infrastructure.web.dto.task.TaskRequest;
 import com.openwebinars.hexagonal.infrastructure.web.dto.task.TaskResponse;
+import com.openwebinars.hexagonal.infrastructure.web.dto.task.UserTaskResponse;
 
 import java.time.LocalDateTime;
 
@@ -52,6 +54,17 @@ public class TaskMapper {
                 task.isComplete(),
                 task.getAuthor()
                 );
+    }
+
+    public static UserTaskResponse toResponse(UserTask userTask){
+        return new UserTaskResponse(
+                userTask.getTask().getId().getValue(),
+                userTask.getTask().getTitle(),
+                userTask.getTask().getDescription(),
+                userTask.getTask().getCreatedAt(),
+                userTask.getTask().isComplete(),
+                userTask.getUser() !=null  ? UserMapper.toDto(userTask.getUser()) : null
+        );
     }
 
     public static EditTaskCommand toCommand(Long id, TaskEditRequest taskEditRequest){

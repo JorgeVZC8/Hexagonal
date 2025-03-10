@@ -20,7 +20,6 @@ public class CreateTaskUseCase {
                 .complete(false)
                 .author(command.author())
                 .build();
-        t= taskRepository.save(t);
-        return t;
+        return taskRepository.save(t);
     }
 }
