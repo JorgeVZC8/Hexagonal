@@ -2,6 +2,8 @@ package com.openwebinars.hexagonal.application.usecase.task.find;
 
 import com.openwebinars.hexagonal.domain.Task;
 import com.openwebinars.hexagonal.domain.TaskId;
+import com.openwebinars.hexagonal.domain.User;
+import com.openwebinars.hexagonal.domain.UserId;
 import com.openwebinars.hexagonal.domain.error.TaskNotFoundException;
 import com.openwebinars.hexagonal.domain.repository.TaskRepository;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +29,16 @@ public class FindTaskUseCase {
         }
 
         return result;
+    }
+
+    public List<Task> findAllByUserId(UserId id){
+        List<Task> tasks= taskRepository.getByUserId(id);
+
+        if (tasks.isEmpty()){
+            throw new TaskNotFoundException();
+        }
+
+        return tasks;
     }
 
 }

@@ -14,6 +14,7 @@ public class Task {
     private String title, description;
     private LocalDateTime createdAt;
     private boolean complete;
+    private UserId author;
 
     public void taskComplete(){
         this.complete=true;

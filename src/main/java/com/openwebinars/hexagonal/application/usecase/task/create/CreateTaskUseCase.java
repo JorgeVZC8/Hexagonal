@@ -18,6 +18,7 @@ public class CreateTaskUseCase {
                 .description(command.description())
                 .createdAt(LocalDateTime.now())
                 .complete(false)
+                .author(command.author())
                 .build();
         t= taskRepository.save(t);
         return t;
