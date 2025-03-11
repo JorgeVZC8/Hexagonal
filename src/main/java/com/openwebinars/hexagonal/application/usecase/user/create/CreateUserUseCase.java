@@ -27,6 +27,6 @@ public class CreateUserUseCase {
 
     private void requiredUniqueEmail(String email) {
         userRepository.getUserByEmail(email)
-                .ifPresent(e-> new EmailAlreadyExistsException());
+                .ifPresent(e->{ throw new EmailAlreadyExistsException();});
     }
 }
